@@ -1,11 +1,13 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
+import MyMenu from "./src/screens/MyMenu";
 
 export default function App() {
 
   return (
-    <View>
-      <Text>Dragon Ball</Text>
-    </View>
+    <NavigationContainer>
+      <MyMenu/>
+    </NavigationContainer>
   );
 }
 
