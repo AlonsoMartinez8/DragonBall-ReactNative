@@ -10,8 +10,11 @@ export default function MyMenu() {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerStyle:{backgroundColor: "#000"},
+        headerTintColor: "#ff9711",
         tabBarActiveTintColor: "#ff9711",
-        tabBarActiveBackgroundColor: "#000",
+        tabBarActiveBackgroundColor: "#111",
+        tabBarInactiveBackgroundColor: "#000",
       }}
     >
       <Tab.Screen

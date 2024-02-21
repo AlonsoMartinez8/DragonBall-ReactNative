@@ -3,32 +3,34 @@ import { StyleSheet, View, Image, Text } from 'react-native'
 
 export default function MundoCard({ item }) {
   return (
-    <View style={styles.row}>
-      <Image source={{ uri: item.image }} style={styles.image} resizeMode="contain" />
-      <View style={[styles.column, { marginLeft: 10 }]}>
-        <Text style={[styles.text, { fontWeight: "bold" }]}>{item.name}</Text>
-        <Text style={styles.text}>{item.description}</Text>
-      </View>
+    <View style={styles.card}>
+      <Image source={{ uri: item.image }} style={styles.image} resizeMode="cover" />
+        <Text style={[styles.name]}>{item.name}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 80,
-    height: 80
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row",
-    margin: 10
-  },
-  column: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-start"
-  },
-  text: {
-    fontSize: 18
-  }
+  card:{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'start',
+    margin: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+    backgroundColor: "#ddd3",
+    borderRadius: 10,
+},
+image: {
+    width: 300,
+    height: 300,
+    borderRadius: 10,
+},
+name: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: "#fff",
+    padding: 10,
+}
 });
