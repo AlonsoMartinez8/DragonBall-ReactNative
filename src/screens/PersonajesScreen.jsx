@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 import { getCharactersByPage } from "../services/dragonBallAPI";
+import CharacterCard from "../components/CharacterCard";
 
 export default function PersonajesScreen() {
   const [personajes, setPersonajes] = useState([])
@@ -26,7 +27,7 @@ export default function PersonajesScreen() {
       <FlatList
         data={personajes}
         renderItem={({ item }) => (
-          <Text key={item.id}>{item.name}</Text>
+          <CharacterCard key={item.id} item={item}/>
         )}
         onEndReachedThreshold={0}
         onEndReached={() => {
