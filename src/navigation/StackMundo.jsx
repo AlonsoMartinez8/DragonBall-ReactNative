@@ -19,7 +19,7 @@ export default function StackMundo() {
         }} 
       />
       <MundoStack.Screen
-        name="MundoDetails"
+        name="Detalle"
         component={MundoDetails}
       />
 
