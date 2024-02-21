@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { getPlanetsByPage } from "../services/dragonBallAPI";
 import MundoCard from "../components/MundoCard";
 
@@ -27,8 +27,9 @@ export default function MundosScreen() {
   }, []);
 
   return (
-    <View>
+    <View style={styles.list}>
       <FlatList
+      
         data={mundos}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -49,3 +50,12 @@ export default function MundosScreen() {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  list:{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: "#ffaa33"
+  }
+})

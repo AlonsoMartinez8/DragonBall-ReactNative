@@ -27,11 +27,10 @@ export default function PersonajesScreen() {
   return (
     <View style={styles.list}>
       <FlatList
-        
         data={personajes}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('CharacterDetails', { item: item })}
+            onPress={() => navigation.navigate("Detalle", { item: item })}
           >
             <CharacterCard key={item.id} item={item}/>
           </TouchableOpacity>
@@ -54,5 +53,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: "#ffaa33"
   }
 })

@@ -11,6 +11,12 @@ export default function StackMundo() {
       <MundoStack.Screen
         name="MundosScreen"
         component={MundosScreen}
+        initialParams={{title:null}} 
+        options={{
+          headerShown: false,
+          headerLeft: null,
+          gestureEnabled: false
+        }} 
       />
       <MundoStack.Screen
         name="MundoDetails"

@@ -5,15 +5,21 @@ import CharacterDetails from '../screens/CharacterDetails';
 
 const CharacterStack = createNativeStackNavigator();
 
-export default function StackCharacter() {
+export default function StackCharacter({item}) {
   return (
     <CharacterStack.Navigator>
       <CharacterStack.Screen
         name="PersonajesScreen"
         component={PersonajesScreen}
+        initialParams={{title:null}} 
+        options={{
+          headerShown: false,
+          headerLeft: null,
+          gestureEnabled: false
+        }} 
       />
       <CharacterStack.Screen
-        name="CharacterDetails"
+        name="Detalle"
         component={CharacterDetails}
       />
 

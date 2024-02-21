@@ -20,16 +20,18 @@ const styles = StyleSheet.create({
         margin: 10,
         width: 300,
         borderWidth: 1,
-        borderColor: '#4448',
+        borderColor: '#fff',
+        backgroundColor: "#ddd3",
         borderRadius: 10,
-        backgroundColor: '#2224'
     },
     image: {
         width: 300,
       height: 300,
     },
     name: {
-        fontSize: 30,
+        fontSize: 20,
         fontWeight: '700',
+        color: "#fff",
+        marginTop: 10,
     }
   });
