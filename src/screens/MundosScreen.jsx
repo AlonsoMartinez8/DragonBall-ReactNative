@@ -32,7 +32,7 @@ export default function MundosScreen() {
         data={mundos}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('CharacterDetails', { item: item })}
+            onPress={() => navigation.navigate('MundoDetails', { item: item })}
           >
             <MundoCard key={item.id} item={item} />
           </TouchableOpacity>
