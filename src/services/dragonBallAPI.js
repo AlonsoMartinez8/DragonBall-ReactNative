@@ -7,13 +7,7 @@ export async function getCharactersByPage(page = 1) {
 }
 
 export async function getPlanetsByPage(page) {
-  let pageStr = ""
-  if(page === 1) {
-    pageStr = ""
-  } else {
-    pageStr = "?page=2&limit=10"
-  }
-  const data = await fetch(`${API}planets${pageStr}`);
+  const data = await fetch(`${API}planets?page=${page}`);
   const json = await data.json();
   return json;
 }
