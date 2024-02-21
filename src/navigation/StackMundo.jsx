@@ -5,7 +5,7 @@ import MundoDetails from '../screens/MundoDetails';
 
 const MundoStack = createNativeStackNavigator();
 
-export default function StackMundor() {
+export default function StackMundo() {
   return (
     <MundoStack.Navigator>
       <MundoStack.Screen
