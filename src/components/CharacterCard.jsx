@@ -3,29 +3,33 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function CharacterCard({item}) {
   return (
-    <View>
+    <View style={styles.card}>
         <Image source={{ uri: item.image }} style={styles.image} resizeMode="contain" />
-        <Text>{item.name}</Text>
+        <Text style={styles.name}>{item.name}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+    card:{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20,
+        margin: 10,
+        width: 300,
+        borderWidth: 1,
+        borderColor: '#4448',
+        borderRadius: 10,
+        backgroundColor: '#2224'
+    },
     image: {
-      width: 80,
-      height: 80
+        width: 300,
+      height: 300,
     },
-    row: {
-      flex: 1,
-      flexDirection: "row",
-      margin: 10
-    },
-    column: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "flex-start"
-    },
-    text: {
-      fontSize: 18
+    name: {
+        fontSize: 30,
+        fontWeight: '700',
     }
   });
