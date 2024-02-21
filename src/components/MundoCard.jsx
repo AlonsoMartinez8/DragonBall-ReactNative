@@ -16,39 +16,30 @@ export default function MundoCard({ item }) {
 
 const styles = StyleSheet.create({
   card: {
-    width: windowWidth - 40,
-    height: 400,
-    marginHorizontal: 20,
+    width: windowWidth - 20,
+    height: 300,
+    marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 15, // Adjust the border radius as needed
     overflow: 'hidden',
   },
   image: {
     flex: 1,
-    width: '100%',
-    height: '100%',
+    // set width and height to null or undefined to override the fixed size
+    width: null,
+    height: null,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'start',
-    margin: 10,
-    borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: "#ddd3",
-    borderRadius: 10,
+    justifyContent: 'center',
 },
-image: {
-    width: 300,
-    height: 300,
-    borderRadius: 10,
-},
-name: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: "#fff",
-    padding: 10,
-}
+  text: {
+    color: 'white',
+    fontSize: 36,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }
 });
