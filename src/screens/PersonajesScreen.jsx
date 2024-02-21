@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import { getCharactersByPage } from "../services/dragonBallAPI";
 import CharacterCard from "../components/CharacterCard";
 
@@ -23,8 +23,9 @@ export default function PersonajesScreen() {
   }, []);
 
   return (
-    <View>
+    <View style={styles.list}>
       <FlatList
+        
         data={personajes}
         renderItem={({ item }) => (
           <CharacterCard key={item.id} item={item}/>
@@ -40,3 +41,11 @@ export default function PersonajesScreen() {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  list:{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  }
+})
