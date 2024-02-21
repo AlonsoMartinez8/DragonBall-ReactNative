@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import { getCharactersByPage } from "../services/dragonBallAPI";
 import CharacterCard from "../components/CharacterCard";
+import { useNavigation } from "@react-navigation/native";
 
 export default function PersonajesScreen() {
   const [personajes, setPersonajes] = useState([])
   const [paginaActual, setPaginaActual] = useState(1)
   const [paginasTotales, setPaginasTotales] = useState(0)
+  const navigation = useNavigation();
 
   const getPersonajes = (page=1)=>{
     getCharactersByPage(page)
@@ -28,7 +30,12 @@ export default function PersonajesScreen() {
         
         data={personajes}
         renderItem={({ item }) => (
-          <CharacterCard key={item.id} item={item}/>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CharacterDetails', { item: item })}
+          >
+            <CharacterCard key={item.id} item={item}/>
+          </TouchableOpacity>
+          
         )}
         onEndReachedThreshold={0}
         onEndReached={() => {
