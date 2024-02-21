@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import PersonajesScreen from "../screens/PersonajesScreen";
-import MundosScreen from "../screens/MundosScreen";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import StackCharacter from "../navigation/StackCharacter";
+import StackMundo from "../navigation/StackMundo";
 import FavoritosScreen from "../screens/FavoritosScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
@@ -15,7 +16,7 @@ export default function MyMenu() {
     >
       <Tab.Screen
         name="Personajes"
-        component={PersonajesScreen}
+        component={StackCharacter}
         options={{
           tabBarIcon: ({ size, color }) => {
             return (
@@ -30,7 +31,7 @@ export default function MyMenu() {
       />
       <Tab.Screen
         name="Mundos"
-        component={MundosScreen}
+        component={StackMundo}
         options={{
           tabBarIcon: ({ size, color }) => {
             return (
