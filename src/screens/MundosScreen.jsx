@@ -38,7 +38,6 @@ export default function MundosScreen() {
             <MundoCard key={item.id} item={item} />
           </TouchableOpacity>
         )}
-        ListFooterComponent={() => <Text>-- End --</Text>}
         onEndReachedThreshold={0}
         onEndReached={() => {
           if (paginaActual < paginasTotales) {

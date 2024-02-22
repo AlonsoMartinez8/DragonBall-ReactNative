@@ -8,7 +8,7 @@ export default function MundoCard({ item }) {
     <View style={styles.card}>
       <Image source={{ uri: item.image }} style={styles.image} resizeMode="cover" />
       <View style={styles.overlay}>
-        <Text style={styles.text}>{item.name}</Text>
+        <Text style={styles.name}>{item.name}</Text>
       </View>
     </View>
   );
@@ -20,33 +20,25 @@ const styles = StyleSheet.create({
     height: 400,
     marginHorizontal: 20,
     marginVertical: 10,
-    borderRadius: 15, // Adjust the border radius as needed
+    borderRadius: 10,
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#fff',
   },
   image: {
-    flex: 1,
     width: '100%',
     height: '100%',
+    borderRadius: 10,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'start',
-    margin: 10,
-    borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: "#ddd3",
-    borderRadius: 10,
-},
-image: {
-    width: 300,
-    height: 300,
+    backgroundColor: "#1113",
     borderRadius: 10,
 },
 name: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: '700',
     color: "#fff",
     padding: 10,
