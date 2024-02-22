@@ -21,6 +21,11 @@ export default function StackCharacter({item}) {
       <CharacterStack.Screen
         name="Detalle"
         component={CharacterDetails}
+        options={{
+          title: null,
+          headerStyle: {backgroundColor:'#000'},
+          headerTintColor: '#fff'
+        }}
       />
 
 

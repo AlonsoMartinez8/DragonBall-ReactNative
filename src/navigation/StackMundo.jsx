@@ -21,6 +21,11 @@ export default function StackMundo() {
       <MundoStack.Screen
         name="Detalle"
         component={MundoDetails}
+        options={{
+          title: null,
+          headerStyle: {backgroundColor:'#000'},
+          headerTintColor: '#fff'
+        }}
       />
 
 
