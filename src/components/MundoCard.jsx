@@ -16,9 +16,9 @@ export default function MundoCard({ item }) {
 
 const styles = StyleSheet.create({
   card: {
-    width: windowWidth - 40,
-    height: 400,
-    marginHorizontal: 20,
+    width: windowWidth - 20,
+    height: 300,
+    marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 10,
     overflow: 'hidden',
