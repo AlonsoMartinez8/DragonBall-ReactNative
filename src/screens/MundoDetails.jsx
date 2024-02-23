@@ -1,26 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   ImageBackground,
-  ScrollView,
+  FlatList,
 } from "react-native";
 
-export default function CharacterDetails({ route }) {
+export default function MundoDetails({ route }) {
   const { item } = route.params;
-  const mundoDestruido = (destruido) => {
-    if (destruido) {
-      return "Destruido";
-    } else {
-      return "Sin destruir";
-    }
-  };
+  const mundoDestruido = (destruido) =>
+    destruido ? "Destruido" : "Sin destruir";
+  const personajes = [
+    {
+      id: 0,
+      nombre: "Goku",
+    },
+    {
+      id: 1,
+      nombre: "Vegeta",
+    },
+    {
+      id: 2,
+      nombre: "Gohan",
+    },
+  ];
 
   return (
-    <ImageBackground source={{ uri: item.image }} style={styles.container}>
-      <ScrollView style={styles.scrollview}>
+    <ImageBackground source={{ uri: item.image }}>
+      <View style={styles.container}>
         <View style={styles.colCenter}>
           <Text style={styles.name}>{item.name}</Text>
         </View>
@@ -33,20 +41,29 @@ export default function CharacterDetails({ route }) {
             <Text style={styles.label}>Destruido</Text>
             <Text style={styles.text}>{mundoDestruido(item.isDestroyed)}</Text>
           </View>
-          <View style={styles.colStart}>
-            <Text style={styles.label}>Personajes</Text>
-            <Text style={styles.text}>{item.gender}</Text>
-          </View>
         </View>
-      </ScrollView>
+        <View style={styles.colStart}>
+          <Text style={styles.label}>Personajes</Text>
+          <FlatList
+          style={styles.list}
+          numColumns={4}
+            data={personajes}
+            renderItem={({ item: personaje }) => (
+              <Text style={styles.text}>
+                {personaje.nombre}
+              </Text>
+            )}
+          />
+        </View>
+      </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 300,
-    height: 300,
+  container: {
+    height: "100%",
+    padding: 20,
   },
   colCenter: {
     display: "flex",
@@ -58,10 +75,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-  },
-  scrollview: {
-    height: "100%",
-    paddingHorizontal: 20,
   },
   label: {
     display: "flex",
