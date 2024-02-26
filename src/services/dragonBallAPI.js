@@ -11,3 +11,9 @@ export async function getPlanetsByPage(page) {
   const json = await data.json();
   return json;
 }
+
+export async function getPlanetById(id) {
+  const data = await fetch(`${API}planets/${id}`)
+  const json = await data.json();
+  return json;
+}

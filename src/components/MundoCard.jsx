@@ -42,5 +42,6 @@ name: {
     fontWeight: '700',
     color: "#fff",
     padding: 10,
+    textAlign: 'center',
 }
 });

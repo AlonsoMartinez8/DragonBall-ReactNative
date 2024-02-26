@@ -5,26 +5,33 @@ import {
   StyleSheet,
   ImageBackground,
   FlatList,
+  Image,
 } from "react-native";
+import { getPlanetById } from "../services/dragonBallAPI";
 
 export default function MundoDetails({ route }) {
+  const [personajes, setPersonajes] = useState([]);
   const { item } = route.params;
+
   const mundoDestruido = (destruido) =>
     destruido ? "Destruido" : "Sin destruir";
-  const personajes = [
-    {
-      id: 0,
-      nombre: "Goku",
-    },
-    {
-      id: 1,
-      nombre: "Vegeta",
-    },
-    {
-      id: 2,
-      nombre: "Gohan",
-    },
-  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const planet = await getPlanetById(item.id);
+        const nuevosPersonajes = planet.characters.map((c) => c.image);
+        setPersonajes((prevPersonajes) => [
+          ...prevPersonajes,
+          ...nuevosPersonajes,
+        ]);
+      } catch (error) {
+        console.error("Error al obtener los personajes:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <ImageBackground source={{ uri: item.image }}>
@@ -45,13 +52,13 @@ export default function MundoDetails({ route }) {
         <View style={styles.colStart}>
           <Text style={styles.label}>Personajes</Text>
           <FlatList
-          style={styles.list}
-          numColumns={4}
+            style={styles.list}
+            numColumns={4}
             data={personajes}
             renderItem={({ item: personaje }) => (
-              <Text style={styles.text}>
-                {personaje.nombre}
-              </Text>
+              <View style={styles.imagecontainer}>
+                <Image style={styles.image} source={{ uri: personaje }} />
+              </View>
             )}
           />
         </View>
@@ -99,6 +106,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 40,
     backgroundColor: "#1113",
+    textAlign: 'center',
     marginTop: 10,
+  },
+  imagecontainer:{
+    backgroundColor: "#0005",
+    width: "25%",
+    height: 120,
+    padding: 5,
+  },
+  image: {
+    objectFit: "contain",
+    width: "100%",
+    height: "100%",
   },
 });
