@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StackCharacter from "../navigation/StackCharacter";
 import StackMundo from "../navigation/StackMundo";
 import FavoritosScreen from "../screens/FavoritosScreen";

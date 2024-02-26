@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,12 +6,30 @@ import {
   StyleSheet,
   ScrollView,
   ImageBackground,
+  Button,
 } from "react-native";
 
 export default function CharacterDetails({ route }) {
   const { item } = route.params;
+  const [isFavorito, setIsFavorito] = useState(false);
+  const [btnTitle, setBtnTitle] = useState("Añadir a favoritos");
+
+  const toggleFavorito = () => {
+    setIsFavorito(!isFavorito);
+    if (!isFavorito) {
+      setBtnTitle("Eliminar de favoritos");
+    } else {
+      setBtnTitle("Añadir a favoritos");
+    }
+  };
+  console.log(isFavorito)
+
   return (
-    <ImageBackground source={require("../../assets/img/bg.png")} style={styles.container}>
+    <ImageBackground
+      source={require("../../assets/img/bg.png")}
+      style={styles.container}
+    >
+      <Button title={btnTitle} onPress={toggleFavorito}></Button>
       <ScrollView style={styles.scrollview}>
         <View style={styles.colCenter}>
           <Image
@@ -42,7 +60,7 @@ export default function CharacterDetails({ route }) {
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     paddingVertical: 20,
   },
   colCenter: {
@@ -65,13 +83,13 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 30,
-    color: '#fff',
-    fontWeight: '800',
+    color: "#fff",
+    fontWeight: "800",
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: "#fff",
     paddingVertical: 10,
-    paddingHorizontal: 40, 
-    backgroundColor: '#1113',
+    paddingHorizontal: 40,
+    backgroundColor: "#1113",
   },
   image: {
     width: 300,
@@ -83,24 +101,24 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     marginTop: 10,
-    backgroundColor: '#ddd',
+    backgroundColor: "#ddd",
   },
   text: {
     textAlign: "center",
-    backgroundColor: '#1115',
+    backgroundColor: "#1115",
     padding: 5,
-    color: '#fff',
+    color: "#fff",
   },
   scrollview: {
-    height: '100%',
+    height: "100%",
     paddingHorizontal: 20,
   },
   description: {
     lineHeight: 20,
     textAlign: "center",
-    backgroundColor: '#1115',
-    color: '#fff',
+    backgroundColor: "#1115",
+    color: "#fff",
     padding: 10,
-    marginTop: 10
+    marginTop: 10,
   },
 });
