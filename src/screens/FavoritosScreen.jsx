@@ -1,17 +1,20 @@
 import { ImageBackground, Text, View, StyleSheet } from "react-native";
-const [personajesfav, setPersonajesFav] = useState([]);
+import React, { useState, useEffect } from "react";
+import { ReadFav } from "../services/dragonBallAPI";
+
 export default function FavoritosScreen() {
+  const [personajesfav, setPersonajesFav] = useState([]);
   const getPersonajesFav = () => {
     ReadFav()
       .then((json) => {
-        setPersonajesFav((previos) => [...previos, ...json.items]);
+        setPersonajesFav((previos) => [...previos, ...json]);
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     getPersonajesFav();
-    console.log(personajesfav);
+    console.log(personajesfav.forEach((element) => console.log(element)));
   }, []);
   return (
     <View>
