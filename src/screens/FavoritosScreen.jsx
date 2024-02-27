@@ -18,7 +18,7 @@ export default function FavoritosScreen() {
     console.log("personajes: " + personajesfav.forEach((element) => console.log(element)));
   }, []);
   return (
-    <View style={styles.list}>
+    <ImageBackground source={require("../../assets/img/favoritos.jpg")} style={styles.list}>
       <FlatList
         numColumns={2}
         data={personajesfav}
@@ -30,7 +30,7 @@ export default function FavoritosScreen() {
           </TouchableOpacity>
         )}
       />
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#ffaa33",
+    height: '100%',
   },
 });
 
