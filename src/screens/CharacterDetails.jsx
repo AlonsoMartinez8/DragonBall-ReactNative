@@ -13,13 +13,14 @@ export default function CharacterDetails({ route }) {
   const { item } = route.params;
   const [isFavorito, setIsFavorito] = useState(false);
   const [btnTitle, setBtnTitle] = useState("Añadir a favoritos");
-
+ 
   const toggleFavorito = () => {
     setIsFavorito(!isFavorito);
     if (!isFavorito) {
       setBtnTitle("Eliminar de favoritos");
     } else {
       setBtnTitle("Añadir a favoritos");
+      addFav(item);
     }
   };
   console.log(isFavorito)
