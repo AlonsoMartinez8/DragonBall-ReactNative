@@ -8,6 +8,7 @@ import {
   ImageBackground,
   Button,
 } from "react-native";
+import { addFav } from "../services/dragonBallAPI";
 
 export default function CharacterDetails({ route }) {
   const { item } = route.params;
@@ -16,7 +17,7 @@ export default function CharacterDetails({ route }) {
  
   const toggleFavorito = () => {
     setIsFavorito(!isFavorito);
-    if (!isFavorito) {
+    if (isFavorito) {
       setBtnTitle("Eliminar de favoritos");
     } else {
       setBtnTitle("Añadir a favoritos");

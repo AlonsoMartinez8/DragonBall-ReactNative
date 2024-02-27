@@ -22,16 +22,24 @@ export async function getPlanetById(id) {
 
 import * as FileSystem from 'expo-file-system';
 
-import { Asset } from 'expo-asset';
+const initializeFile = async () => {
+  const filePath = `${FileSystem.documentDirectory}favJson.json`;
 
-// Load the file from the assets to document directory on app startup
-const loadFileToDocumentDirectory = async () => {
-  const asset = Asset.fromModule(require('../services/favJson.json'));
-  await FileSystem.downloadAsync(asset.uri, `${FileSystem.documentDirectory}${asset.name}`);
+  // Check if the file exists
+  const fileInfo = await FileSystem.getInfoAsync(filePath);
+
+  if (!fileInfo.exists) {
+    // Create the file with default content
+    const defaultData = { personajesfav: [], planetas: [] };
+    const jsonData = JSON.stringify(defaultData, null, 2);
+
+    await FileSystem.writeAsStringAsync(filePath, jsonData, { encoding: FileSystem.EncodingType.UTF8 });
+    console.log("File initialized successfully");
+  }
 };
 
-// Call the function to load the file (you can do this in your app initialization code)
-loadFileToDocumentDirectory();
+// Call the initialization function
+initializeFile();
 
 // Path to the file in document directory
 const filePath = `${FileSystem.documentDirectory}favJson.json`;
@@ -52,6 +60,7 @@ export async function ReadFav() { // devuelve un array de personajes favoritos (
 }
 export async function AddFavToJson(personajesfav, item) { // agrega un nuevo personaje al array
   personajesfav.push(item);
+  console.log("pushing" + item);
 }
 export async function WriteFav(personajesfav) { // escribe el nuevo array al archivo json
   try {
