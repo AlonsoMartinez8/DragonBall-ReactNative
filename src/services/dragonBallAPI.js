@@ -35,7 +35,6 @@ const initializeFile = async () => {
     await FileSystem.writeAsStringAsync(filePath, jsonData, {
       encoding: FileSystem.EncodingType.UTF8,
     });
-    console.log("File initialized successfully");
   }
 };
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
 import { getPlanetsByPage } from "../services/dragonBallAPI";
 import MundoCard from "../components/MundoCard";
 
@@ -27,9 +27,9 @@ export default function MundosScreen() {
   }, []);
 
   return (
-    <View style={styles.list}>
+    <ImageBackground source={require("../../assets/img/background.jpg")} style={styles.list}>
       <FlatList
-      
+      numColumns={2}
         data={mundos}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -46,7 +46,7 @@ export default function MundosScreen() {
           }
         }}
       />
-    </View>
+    </ImageBackground>
   );
 };
 

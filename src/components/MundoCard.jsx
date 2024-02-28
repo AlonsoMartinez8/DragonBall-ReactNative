@@ -16,8 +16,8 @@ export default function MundoCard({ item }) {
 
 const styles = StyleSheet.create({
   card: {
-    width: windowWidth - 20,
-    height: 300,
+    width: windowWidth/2-20,
+    height: windowWidth/2-20,
     marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 10,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 },
 name: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: '700',
     color: "#fff",
     padding: 10,

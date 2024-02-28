@@ -1,5 +1,6 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+let windowWidth = Dimensions.get('window').width;
+let windowHeight = Dimensions.get('window').height;
 export default function CharacterCard({ item }) {
   return (
     <View style={styles.card}>
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     margin: 10,
-    width: 180,
-    height: 200,
+    width: windowWidth/2-20,
+    height: windowHeight/4-20,
     borderWidth: 1,
     borderColor: "#fff",
     borderRadius: 10,

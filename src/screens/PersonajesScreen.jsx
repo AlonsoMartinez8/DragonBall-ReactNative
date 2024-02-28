@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import { getCharactersByPage } from "../services/dragonBallAPI";
 import CharacterCard from "../components/CharacterCard";
@@ -31,7 +32,7 @@ export default function PersonajesScreen() {
   }, []);
 
   return (
-    <View style={styles.list}>
+    <ImageBackground source={require("../../assets/img/background.jpg")} style={styles.list}>
       <FlatList
         numColumns={2}
         data={personajes}
@@ -50,7 +51,7 @@ export default function PersonajesScreen() {
           }
         }}
       />
-    </View>
+    </ImageBackground>
   );
 }
 
