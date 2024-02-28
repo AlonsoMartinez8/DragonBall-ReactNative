@@ -24,7 +24,6 @@ export default function CharacterDetails({ route }) {
       addFav(item);
     }
   };
-  console.log(isFavorito)
 
   return (
     <ImageBackground

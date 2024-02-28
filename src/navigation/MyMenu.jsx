@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 
 export default function MyMenu() {
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -48,6 +49,7 @@ export default function MyMenu() {
       />
       <Tab.Screen
         name="Favoritos"
+        initialParams={{ reRender: true }}
         component={FavoritosScreen}
         options={{
           tabBarIcon: ({ size, color }) => {

@@ -1,31 +1,38 @@
-import { ImageBackground, Text, View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
-import React, { useState, useEffect } from "react";
+import {
+  ImageBackground,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
 import { ReadFav } from "../services/dragonBallAPI";
 import CharacterCard from "../components/CharacterCard";
 
-export default function FavoritosScreen() {
+export default function FavoritosScreen({route}) {
   const [personajesfav, setPersonajesFav] = useState([]);
+
   const getPersonajesFav = () => {
     ReadFav()
       .then((json) => {
-        setPersonajesFav((previos) => [...previos, ...json]);
+        setPersonajesFav(json);
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     getPersonajesFav();
-    console.log("personajes: " + personajesfav.forEach((element) => console.log(element)));
-  }, []);
+  }, [route.params]);
+
   return (
-    <ImageBackground source={require("../../assets/img/favoritos.jpg")} style={styles.list}>
+    <ImageBackground
+      source={require("../../assets/img/favoritos.jpg")}
+      style={styles.list}
+    >
       <FlatList
         numColumns={2}
         data={personajesfav}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => console.log("personaje click")}
-          >
+          <TouchableOpacity onPress={() => console.log("personaje click")}>
             <CharacterCard key={item.id} item={item} />
           </TouchableOpacity>
         )}
@@ -40,7 +47,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#ffaa33",
-    height: '100%',
+    height: "100%",
   },
 });
-

@@ -12,15 +12,14 @@ export async function getPlanetsByPage(page) {
 }
 
 export async function getPlanetById(id) {
-  const data = await fetch(`${API}planets/${id}`)
+  const data = await fetch(`${API}planets/${id}`);
   const json = await data.json();
   return json;
 }
 
-
 // ------------------------ Leer desde JSON local ---------------------- \\
 
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from "expo-file-system";
 
 const initializeFile = async () => {
   const filePath = `${FileSystem.documentDirectory}favJson.json`;
@@ -33,7 +32,9 @@ const initializeFile = async () => {
     const defaultData = { personajesfav: [], planetas: [] };
     const jsonData = JSON.stringify(defaultData, null, 2);
 
-    await FileSystem.writeAsStringAsync(filePath, jsonData, { encoding: FileSystem.EncodingType.UTF8 });
+    await FileSystem.writeAsStringAsync(filePath, jsonData, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
     console.log("File initialized successfully");
   }
 };
@@ -48,31 +49,34 @@ export async function addFav(item) {
   await AddFavToJson(personajesfav, item);
   await WriteFav(personajesfav);
 }
-export async function ReadFav() { // devuelve un array de personajes favoritos (obtenido desde json)
+export async function ReadFav() {
+  // devuelve un array de personajes favoritos (obtenido desde json)
   try {
-    const data = await FileSystem.readAsStringAsync(filePath, { encoding: FileSystem.EncodingType.UTF8 });
+    const data = await FileSystem.readAsStringAsync(filePath, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
     const json = JSON.parse(data);
     return json.personajesfav;
   } catch (error) {
-    console.error('Error reading fav data:', error);
+    console.error("Error reading fav data:", error);
     return [];
   }
 }
-export async function AddFavToJson(personajesfav, item) { // agrega un nuevo personaje al array
+export async function AddFavToJson(personajesfav, item) {
+  // agrega un nuevo personaje al array
   personajesfav.push(item);
-  console.log("pushing" + item);
 }
-export async function WriteFav(personajesfav) { // escribe el nuevo array al archivo json
+export async function WriteFav(personajesfav) {
+  // escribe el nuevo array al archivo json
   try {
     const data = {
-      "personajesfav": personajesfav,
-      "planetas": []
+      personajesfav: personajesfav,
     };
     const jsonData = JSON.stringify(data, null, 2);
-    await FileSystem.writeAsStringAsync(filePath, jsonData, { encoding: FileSystem.EncodingType.UTF8 });
-    console.log("hecho");
+    await FileSystem.writeAsStringAsync(filePath, jsonData, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
   } catch (error) {
-    console.error('Error writing data:', error);
+    console.error("Error writing data:", error);
   }
 }
-
