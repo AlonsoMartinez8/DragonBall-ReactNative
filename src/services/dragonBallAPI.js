@@ -80,3 +80,40 @@ export async function WriteFav(personajesfav) {
     console.error("Error writing data:", error);
   }
 }
+
+export const RemoveFav = async (itemId) => {
+  try {
+    // Leer el contenido actual del archivo
+    const data = await FileSystem.readAsStringAsync(filePath, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
+
+    // Parsear el JSON y obtener el array de personajes favoritos
+    const json = JSON.parse(data);
+    const personajesfav = json.personajesfav;
+
+    // Encontrar el índice del objeto a eliminar
+    const indexToRemove = personajesfav.findIndex((item) => item.id === itemId);
+
+    // Si el objeto existe, eliminarlo del array
+    if (indexToRemove !== -1) {
+      personajesfav.splice(indexToRemove, 1);
+
+      // Escribir los datos actualizados de vuelta al archivo
+      const updatedData = {
+        ...json,
+        personajesfav: personajesfav,
+      };
+
+      const updatedJsonData = JSON.stringify(updatedData, null, 2);
+
+      await FileSystem.writeAsStringAsync(filePath, updatedJsonData, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+    } else {
+      console.log("Item not found");
+    }
+  } catch (error) {
+    console.error("Error removing item:", error);
+  }
+};

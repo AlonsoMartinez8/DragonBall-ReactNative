@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,29 +8,54 @@ import {
   ImageBackground,
   Button,
 } from "react-native";
-import { addFav } from "../services/dragonBallAPI";
+import { ReadFav, addFav, RemoveFav } from "../services/dragonBallAPI";
 
 export default function CharacterDetails({ route }) {
   const { item } = route.params;
   const [isFavorito, setIsFavorito] = useState(false);
-  const [btnTitle, setBtnTitle] = useState("Añadir a favoritos");
- 
-  const toggleFavorito = () => {
-    setIsFavorito(!isFavorito);
-    if (isFavorito) {
+  const [btnTitle, setBtnTitle] = useState("");
+  const [personajesfav, setPersonajesFav] = useState([]);
+
+  const getPersonajesFav = () => {
+    ReadFav()
+      .then((json) => {
+        setPersonajesFav(json);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const checkIsFavorito = (id) => {
+    const favorito = personajesfav.find((fav) => fav.id === id);
+    return favorito !== undefined;
+  };
+
+  const handleBtnTitle = () => {
+    if (checkIsFavorito(item.id)) {
       setBtnTitle("Eliminar de favoritos");
     } else {
       setBtnTitle("Añadir a favoritos");
-      addFav(item);
     }
   };
+
+  const handleFav = () => {
+    if (!checkIsFavorito(item.id)) {
+      addFav(item);
+    } else {
+      RemoveFav(item.id)
+    }
+  };
+
+  useEffect(() => {
+    getPersonajesFav();
+    handleBtnTitle();
+  }, [route.params, personajesfav]);
 
   return (
     <ImageBackground
       source={require("../../assets/img/bg.png")}
       style={styles.container}
     >
-      <Button title={btnTitle} onPress={toggleFavorito}></Button>
+      <Button title={btnTitle} onPress={handleFav}></Button>
       <ScrollView style={styles.scrollview}>
         <View style={styles.colCenter}>
           <Image

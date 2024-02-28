@@ -15,7 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   header:{
     padding: 10,
-    paddingTop: 20,
+    paddingTop: 30,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: '800',

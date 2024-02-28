@@ -20,6 +20,7 @@ export default function StackCharacter({item}) {
       />
       <CharacterStack.Screen
         name="Detalle"
+        initialParams={{ reRender: true }}
         component={CharacterDetails}
         options={{
           title: null,
