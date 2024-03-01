@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  Dimensions,
 } from "react-native";
 import { getPlanetsByPage } from "../services/dragonBallAPI";
 import MundoCard from "../components/MundoCard";
 import MySearchBar from "../components/MySearchBar";
+
+const wh = Dimensions.get('window').height
 
 export default function MundosScreen() {
   const [mundos, setMundos] = useState([]);
@@ -85,6 +88,7 @@ export default function MundosScreen() {
 
 const styles = StyleSheet.create({
   list: {
+    height: wh,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

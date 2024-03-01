@@ -6,11 +6,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from "react-native";
 import { getCharactersByPage } from "../services/dragonBallAPI";
 import CharacterCard from "../components/CharacterCard";
 import { useNavigation } from "@react-navigation/native";
 import MySearchBar from "../components/MySearchBar";
+
+const wh = Dimensions.get('window').height
 
 export default function PersonajesScreen() {
   const [personajes, setPersonajes] = useState([]);
@@ -84,7 +87,7 @@ export default function PersonajesScreen() {
 
 const styles = StyleSheet.create({
   list: {
-    height: "100%",
+    height: wh,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
