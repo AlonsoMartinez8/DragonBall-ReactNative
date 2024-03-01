@@ -13,8 +13,6 @@ import CharacterCard from "../components/CharacterCard";
 import { useNavigation } from "@react-navigation/native";
 import MySearchBar from "../components/MySearchBar";
 
-const wh = Dimensions.get('window').height
-
 export default function PersonajesScreen() {
   const [personajes, setPersonajes] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
@@ -87,7 +85,7 @@ export default function PersonajesScreen() {
 
 const styles = StyleSheet.create({
   list: {
-    height: wh,
+    height: '100%',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
