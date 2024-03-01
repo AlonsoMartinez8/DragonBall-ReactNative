@@ -75,8 +75,7 @@ export default function MundosScreen() {
         onEndReachedThreshold={0}
         onEndReached={() => {
           if (paginaActual < paginasTotales) {
-            getMundos(paginaActual + 1);
-            setPaginaActual(paginaActual + 1);
+            setPaginaActual((prev) => prev + 1);
           }
         }}
       />
