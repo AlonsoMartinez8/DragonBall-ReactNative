@@ -36,9 +36,9 @@ export default function PersonajesScreen() {
   };
 
   const managePersonajesBySearch = () => {
-    if (search !== '') {
-      let buscados = personajes.filter(
-        (p) => p.name.toLowerCase().includes(search.toLowerCase())
+    if (search !== "") {
+      let buscados = personajes.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
       );
       setSearchedPersonajes(buscados);
     } else {
@@ -46,7 +46,7 @@ export default function PersonajesScreen() {
     }
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     managePersonajesBySearch();
   }, [search, personajes]);
 
@@ -71,7 +71,7 @@ export default function PersonajesScreen() {
             <CharacterCard key={item.id} item={item} />
           </TouchableOpacity>
         )}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0}
         onEndReached={() => {
           if (paginaActual < paginasTotales) {
             setPaginaActual((prev) => prev + 1);
@@ -84,7 +84,7 @@ export default function PersonajesScreen() {
 
 const styles = StyleSheet.create({
   list: {
-    height: '100%',
+    height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
