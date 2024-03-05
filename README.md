@@ -25,7 +25,7 @@ App de personajes de DragonBall con ReactNative y Expo usando la [dragonball-api
 
 Aplicación móvil multiplataforma basada en [React Native](https://reactnative.dev/). Hemos usado Expo como plataforma para hacer pruebas y hacer el despliegue final.
 
-### Nuestra aplicación
+### Nuestra aplicación
 
 Este proyecto en concreto consiste en una aplicación que sirve para tener una herramienta sencilla donde podamos visualizar los diferentes personajes que aparecen a lo largo de las distintas series y películas de Dragon Ball, además de los planetas o mundos de donde provienen.
 
@@ -33,7 +33,7 @@ Este proyecto en concreto consiste en una aplicación que sirve para tener una h
 
 Durante el proceso de desarrollo nos han ido surgiendo diferentes necesidades como un menú de navegación, descarga de datos por internet, etc. Para solucionar cada uno de estos problemas hemos ido añadiendo diferentes dependencias.
 
-#### Configurando el entorno de desarrollo
+### Configurando el entorno de desarrollo
 
 Antes de empezar a programar, hemos tenido que instalar estos programas:
 
@@ -51,7 +51,7 @@ Antes de empezar a programar, hemos tenido que instalar estos programas:
 - [expo go](https://expo.dev/client)
   
 
-### React
+### React
 
 Una vez descargadas todas esas herramientas, creamos nuestra aplicación con
 
