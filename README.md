@@ -1,6 +1,6 @@
 # Dragon Ball - React Native
 
-App de personajes de DragonBall con ReactNative y Expo usando la [dragonball-api]([https://web.dragonball-api.com/](https://web.dragonball-api.com/)).
+App de personajes de DragonBall con ReactNative y Expo usando la [dragonball-api](https://web.dragonball-api.com/).
 
 ![logo dragonball api](https://web.dragonball-api.com/images-compress/logo_dragonballapi.webp)
 
