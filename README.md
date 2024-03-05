@@ -27,7 +27,7 @@ Aplicación móvil multiplataforma basada en [React Native](https://reactnative.
 
 ### Nuestra aplicación
 
-Este proyecto en concreto consiste en una aplicación que sirve para tener una herramienta sencilla donde podamos visualizar los diferentes personajes que aparecen a lo largo de las distintas series y películas de Dragon Ball, además de los planetas o mundos de donde provienen.
+Este proyecto en concreto consiste en una aplicación que sirve para tener una herramienta sencilla donde podamos visualizar los diferentes personajes que aparecen a lo largo de las distintas series y películas de [Dragon Ball](https://es.dragon-ball-official.com/), además de los planetas o mundos de donde provienen.
 
 # Requisitos
 
