@@ -43,7 +43,6 @@ Antes de empezar a programar, hemos tenido que instalar estos programas:
   
 - [android studio](https://developer.android.com/studio?hl=es-419)
   
-
 - [node](https://nodejs.org/en)
   
 - [npm](https://www.npmjs.com/)
