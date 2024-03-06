@@ -5,8 +5,11 @@ let windowWidth = Dimensions.get('window').width;
 
 export default function MundoCard({ item }) {
   return (
+    /* MundoCard -> Es un componente */
     <View style={styles.card}>
+      {/* Imagen del mundo */}
       <Image source={{ uri: item.image }} style={styles.image} resizeMode="cover" />
+      {/* Nombre del mundo */}
       <View style={styles.overlay}>
         <Text style={styles.name}>{item.name}</Text>
       </View>

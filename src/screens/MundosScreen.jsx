@@ -22,6 +22,7 @@ export default function MundosScreen() {
 
   const navigation = useNavigation();
 
+  // obtener los mundos de la API
   const getMundos = (page = 1) => {
     getPlanetsByPage(page)
       .then((json) => {
@@ -32,10 +33,12 @@ export default function MundosScreen() {
       .catch((error) => console.log(error));
   };
 
+  // filtro de mundos por nombre
   const handleSearch = (searchValue) => {
     setSearch(searchValue);
   };
 
+  // gestionar los mundos que se ven en la interfaz por la búsqueda
   const manageMundosBySearch = () => {
     if (search !== "") {
       let buscados = mundos.filter((p) =>
@@ -47,33 +50,41 @@ export default function MundosScreen() {
     }
   };
 
+  // hook para obtener los mundos y que se actualicen al buscar
   useEffect(() => {
     manageMundosBySearch();
   }, [search, mundos]);
 
+  // hook para obtener los mundos y que se actualicen
   useEffect(() => {
     getMundos(paginaActual);
   }, [paginaActual]);
 
   return (
+    // Imagen de fondo
     <ImageBackground
       source={require("../../assets/img/background.jpg")}
       style={styles.list}
     >
+      {/* Barra de búsqueda -> Es un componente */}
       <MySearchBar onSearchChange={handleSearch} />
+      {/* Lista de mundos que depende del hook */}
       <FlatList
         numColumns={2}
         data={searchedMundos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
+          // Botón para ver el detalle de un mundo
           <TouchableOpacity
             onPress={() => navigation.navigate("Detalle", { item: item })}
           >
+            {/* Card de mundo -> Es un componente */}
             <MundoCard key={item.id} item={item} />
           </TouchableOpacity>
         )}
         onEndReachedThreshold={0}
         onEndReached={() => {
+          {/* Al llegar al final de la lista, cargar más mundos */}
           if (paginaActual < paginasTotales) {
             setPaginaActual((prev) => prev + 1);
           }

@@ -3,12 +3,15 @@ let windowWidth = Dimensions.get('window').width;
 let windowHeight = Dimensions.get('window').height;
 export default function CharacterCard({ item }) {
   return (
+    // Tarjeta de personaje
     <View style={styles.card}>
+      {/* Imagen del personaje */}
       <Image
         source={{ uri: item.image }}
         style={styles.image}
         resizeMode="contain"
       />
+      {/* Nombre del personaje */}
       <View style={styles.overlay}>
         <Text style={styles.name}>{item.name}</Text>
       </View>

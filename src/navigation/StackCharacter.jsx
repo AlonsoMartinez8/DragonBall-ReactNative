@@ -7,6 +7,7 @@ const CharacterStack = createNativeStackNavigator();
 
 export default function StackCharacter({item}) {
   return (
+    // Stack de personajes con la pantalla de personajes y la de detalles
     <CharacterStack.Navigator>
       <CharacterStack.Screen
         name="PersonajesScreen"

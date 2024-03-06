@@ -8,6 +8,8 @@ const Tab = createBottomTabNavigator();
 export default function MyMenu() {
 
   return (
+    // Navegador de pestañas con las pantallas de personajes, mundos y favoritos
+    // Cada pantalla tiene su propio stack de navegación
     <Tab.Navigator
       screenOptions={{
         headerStyle:{backgroundColor: "#000", borderTopColor: '#fff4', borderTopWidth: 1,},

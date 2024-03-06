@@ -22,6 +22,7 @@ export default function PersonajesScreen() {
 
   const navigation = useNavigation();
 
+  // obtener los personajes desde la API
   const getPersonajes = (page = 1) => {
     getCharactersByPage(page)
       .then((json) => {
@@ -32,10 +33,12 @@ export default function PersonajesScreen() {
       .catch((error) => console.log(error));
   };
 
+  // filtro de personajes por nombre
   const handleSearch = (searchValue) => {
     setSearch(searchValue);
   };
 
+  // gestionar los personajes que se ven en la interfaz por la búsqueda
   const managePersonajesBySearch = () => {
     if (search !== "") {
       let buscados = personajes.filter((p) =>
@@ -47,26 +50,34 @@ export default function PersonajesScreen() {
     }
   };
 
+  // hook para obtener los personajes y que se actualicen al buscar
   useEffect(() => {
     managePersonajesBySearch();
   }, [search, personajes]);
 
+  // hook para obtener los personajes y que se actualicen
   useEffect(() => {
     getPersonajes(paginaActual);
   }, [paginaActual]);
 
   return (
+    // Imagen de fondo de la pantalla
     <ImageBackground
       source={require("../../assets/img/background.jpg")}
       style={styles.list}
     >
+      {/* Barra de búsqueda */}
       <MySearchBar onSearchChange={handleSearch} />
+        
+      {/* Lista de personajes */}
       <FlatList
         numColumns={2}
         data={searchedPersonajes}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
+          // por cada personaje, mostrar su tarjeta
           <TouchableOpacity
+            // al pulsar, navegar a la pantalla de detalles con el personaje
             onPress={() => navigation.navigate("Detalle", { item: item })}
           >
             <CharacterCard key={item.id} item={item} />
@@ -74,6 +85,7 @@ export default function PersonajesScreen() {
         )}
         onEndReachedThreshold={0}
         onEndReached={() => {
+          // si no se ha llegado al final de la lista, cargar más personajes
           if (paginaActual < paginasTotales) {
             setPaginaActual((prev) => prev + 1);
           }
