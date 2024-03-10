@@ -5,8 +5,10 @@ import { useState } from "react";
 
 export default function App() {
   return (
+    // Contenedor de navegación
     <NavigationContainer>
       <Text style={styles.header}>DRAGON BALL</Text>
+      {/* Menú de aplicacion que va cambiando de pantalla */}
       <MyMenu />
     </NavigationContainer>
   );

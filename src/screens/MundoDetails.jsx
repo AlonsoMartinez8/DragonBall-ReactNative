@@ -13,9 +13,11 @@ export default function MundoDetails({ route }) {
   const [personajes, setPersonajes] = useState([]);
   const { item } = route.params;
 
+  // segun el booleano, mostrar si el mundo esta destruido o no
   const mundoDestruido = (destruido) =>
     destruido ? "Destruido" : "Sin destruir";
 
+  // obtener los personajes del mundo desde la api de forma asíncrona
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,11 +36,16 @@ export default function MundoDetails({ route }) {
   }, []);
 
   return (
+    // Imagen de fondo de la pantalla
     <ImageBackground source={{ uri: item.image }}>
       <View style={styles.container}>
+        {/* Nombre del mundo */}
         <View style={styles.colCenter}>
           <Text style={styles.name}>{item.name}</Text>
         </View>
+
+
+        {/* Resto de detalles del mundo */}
         <View style={styles.colStart}>
           <View style={styles.colStart}>
             <Text style={styles.label}>Descripción</Text>
@@ -46,9 +53,13 @@ export default function MundoDetails({ route }) {
           </View>
           <View style={styles.colStart}>
             <Text style={styles.label}>Destruido</Text>
+            {/* Según el booleano, mostrar si el mundo está destruido o no */}
             <Text style={styles.text}>{mundoDestruido(item.isDestroyed)}</Text>
           </View>
         </View>
+
+
+        {/* Personajes del mundo */}
         <View style={styles.colStart}>
           <Text style={styles.label}>Personajes</Text>
           <FlatList
@@ -56,6 +67,7 @@ export default function MundoDetails({ route }) {
             numColumns={4}
             data={personajes}
             renderItem={({ item: personaje }) => (
+              // por cada personaje, mostrar su imagen
               <View style={styles.imagecontainer}>
                 <Image style={styles.image} source={{ uri: personaje }} />
               </View>

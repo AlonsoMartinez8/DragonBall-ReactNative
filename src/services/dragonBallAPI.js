@@ -1,16 +1,21 @@
-const API = "https://dragonball-api.com/api/";
+// ------------------------ Leer desde API ---------------------- \\
+const API = "https://dragonball-api.com/api/"; // URL de la API
+
+// Obtener los personajes de la API por página
 export async function getCharactersByPage(page = 1) {
   const data = await fetch(`${API}characters?page=${page}`);
   const json = await data.json();
   return json;
 }
 
+// Obtener los mundos de la API por página
 export async function getPlanetsByPage(page  = 1) {
   const data = await fetch(`${API}planets?page=${page}`);
   const json = await data.json();
   return json;
 }
 
+// Obtener un planeta de la API por su id
 export async function getPlanetById(id) {
   const data = await fetch(`${API}planets/${id}`);
   const json = await data.json();
@@ -41,7 +46,7 @@ const initializeFile = async () => {
 // Call the initialization function
 initializeFile();
 
-// Path to the file in document directory
+// ------------------------ Leer desde JSON local ---------------------- \\
 const filePath = `${FileSystem.documentDirectory}favJson.json`;
 export async function addFav(item) {
   let personajesfav = await ReadFav();
@@ -110,9 +115,9 @@ export const RemoveFav = async (itemId) => {
         encoding: FileSystem.EncodingType.UTF8,
       });
     } else {
-      console.log("Item not found");
+      console.log("Item no encontrado en el array. No se puede eliminar.");
     }
   } catch (error) {
-    console.error("Error removing item:", error);
+    console.error("Error al eliminar el personaje favorito:", error);
   }
 };

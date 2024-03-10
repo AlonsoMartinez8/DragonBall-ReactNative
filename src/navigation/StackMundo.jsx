@@ -7,7 +7,9 @@ const MundoStack = createNativeStackNavigator();
 
 export default function StackMundo() {
   return (
+    // Stack de mundos con la pantalla de mundos y la de detalles
     <MundoStack.Navigator>
+      
       <MundoStack.Screen
         name="MundosScreen"
         component={MundosScreen}
@@ -18,6 +20,7 @@ export default function StackMundo() {
           gestureEnabled: false
         }} 
       />
+
       <MundoStack.Screen
         name="Detalle"
         component={MundoDetails}
@@ -27,8 +30,7 @@ export default function StackMundo() {
           headerTintColor: '#fff'
         }}
       />
-
-
+      
     </MundoStack.Navigator>
   )
 }

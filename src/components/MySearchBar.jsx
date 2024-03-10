@@ -4,17 +4,21 @@ import { Dimensions, StyleSheet, TextInput, View } from "react-native";
 const ww = Dimensions.get("window").width;
 
 export default function MySearchBar({ onSearchChange }) {
+  // estado para la búsqueda
   const [search, setSearch] = useState("");
 
+  // función para gestionar el cambio en la búsqueda
   const handleSearchChange = (s) => {
     setSearch(s);
   };
 
+  // hook para que se actualice la búsqueda cuando el usuario cambie el texto
   useEffect(() => {
     onSearchChange(search);
   }, [search]);
 
   return (
+    // Barra de búsqueda
     <View style={styles.container}>
       <TextInput
         style={styles.searchbar}
