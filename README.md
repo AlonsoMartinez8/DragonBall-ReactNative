@@ -143,3 +143,60 @@ Cabe destacar que en nuestro caso tambien hay que tener en cuenta que el resulta
 const [paginaActual, setPaginaActual] = useState(1);
 const [paginasTotales, setPaginasTotales] = useState(0);
 ```
+# Componentes
+A lo largo del desarrollo de la App hemos necesitado incorporar distintos tipos de componentes
+ - Componentes de navegación y pantallas
+ - Componentes propios para funcionalidades específicas
+ 
+En éste apartado contemplaremos los **componentes propios**, ya que en el siguiente analizaremos específicamente los de navegación.
+```bash
+src
+|-- components
+|   |-- CharacterCard.jsx
+|   |-- MundoCard.jsx
+|   |-- MySearchBar.jsx
+```
+## Cards
+Las Card o *Tarjetas* son diseñadas con el fin de mostrar una vista previa de los *items* mostrados en nuestras **FlatList** y poder ser seleccionadas por el usuario para ver su detalle.
+Es una forma de mostrar información básica de manera minimalista.
+
+> Los **items** son los elementos de una lista. En éste caso, nuestras Card, que mostrarán Personajes y Mundos de la saga de DragonBall.
+> 
+> Una **FlatList** es un componente nativo de ReacNative. Son listas dinámicas las cuales se componen de cada objeto de un array de objetos
+
+### Character Card
+En éste componente nos encontramos con la importación de los distintos componentes nativos de ReactNative utilizados y además, con dos variables: *windowWidth* y *windowHeight*.
+```js
+import { Dimensions, Image, StyleSheet, Text, View } from  "react-native";
+
+let  windowWidth  =  Dimensions.get('window').width;
+let  windowHeight  =  Dimensions.get('window').height;
+```
+Éstas variables serán utilizadas en el estilo del componente para fijarle una altura y anchura dependiente del tamaño de la pantalla del dispositivo.
+```json
+card: {
+width:  windowWidth/2-20,
+height:  windowHeight/4-20,
+...
+},
+```
+En cuanto a la estructura del componente:
+```jsx
+return (
+  <View  style={styles.card}>
+	<Image
+	  source={{ uri:  item.image }}
+	  style={styles.image}
+	  resizeMode="contain"
+	/>
+	<View  style={styles.overlay}>
+	  <Text  style={styles.name}>{item.name}</Text>
+	</View>
+  </View>
+);
+```
+Encontramos un componente **View** como contenedor principal encapsulando una **Image** y otro contenedor que alberga un texto.
+El motivo por el que utilizamos un contenedor para la etiqueta **Text** es el estilado. 
+Utilizaremos técnicas de **posicionamiento absoluto** para que la imagen ocupe todo el espacio y el contenedor del texto con el estilo *overlay* se posicione por encima.
+El resultado sería :
+![Character Card imagen](assets/docImg/CharacterCard.PNG?row=true)
