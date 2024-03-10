@@ -175,10 +175,9 @@ let  windowHeight  =  Dimensions.get('window').height;
 Éstas variables serán utilizadas en el estilo del componente para fijarle una altura y anchura dependiente del tamaño de la pantalla del dispositivo.
 ```json
 card: {
-width:  windowWidth/2-20,
-height:  windowHeight/4-20,
-...
-},
+  width:  windowWidth/2-20,
+  height:  windowHeight/4-20
+}
 ```
 En cuanto a la estructura del componente:
 ```jsx
@@ -199,4 +198,23 @@ Encontramos un componente **View** como contenedor principal encapsulando una **
 El motivo por el que utilizamos un contenedor para la etiqueta **Text** es el estilado. 
 Utilizaremos técnicas de **posicionamiento absoluto** para que la imagen ocupe todo el espacio y el contenedor del texto con el estilo *overlay* se posicione por encima.
 El resultado sería :
+
 ![Character Card imagen](assets/docImg/CharacterCard.PNG?row=true)
+
+En cuanto a la funcionalidad, es ínfima. Lo único que realiza éste componente es la visualización de los datos proporcionados en un objeto a través de sus *props*:
+```jsx
+export  default  function  CharacterCard({ item }) {}
+```
+En concreto, únicamente utiliza el *nombre* y la *imagen*.
+### Character Card
+Éste componente es casi exactamente igual al anterior. De hecho pensamos en unificar ambos en un único componente **Card** pero debido a la falta de tiempo lo posponemos para implementarlo en un futuro.
+
+> Quisiéramos añadir que ustedes como comunidad también podéis aportar en el proyecto realizando una Pull Request.
+
+El único comportamiento distinto a destacar es la utilización de una única variable
+ ```js 
+ let  windowWidth  =  Dimensions.get('window').width;
+ ```
+ debido a que decidimos que el aspecto de éste componente sería cuadrado y no rectangular.
+ 
+![Character Card imagen](assets/docImg/MundoCard.PNG?row=true)
