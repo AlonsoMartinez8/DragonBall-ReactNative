@@ -12,7 +12,6 @@ export default function CharacterCard({ item }) {
       <View style={styles.overlay}>
         <Text style={styles.name}>{item.name}</Text>
       </View>
-      
     </View>
   );
 }
