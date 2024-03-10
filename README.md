@@ -218,3 +218,129 @@ El único comportamiento distinto a destacar es la utilización de una única va
  debido a que decidimos que el aspecto de éste componente sería cuadrado y no rectangular.
  
 ![Character Card imagen](assets/docImg/MundoCard.PNG?row=true)
+
+## SearchBar
+El componente MySearchBar se pensó para implementar una funcionalidad de búsqueda de *items*  en nuestras listas.
+Finalmente, no actúa como componente de **Búsqueda**, sino como componente de **Filtro**.
+
+> Detallar que la funcionalidad completa de éste componente no está desarrollada intrínsecamente en él sino en otros componentes.
+> Es a futuro la implementación de toda la funcionalidad en él para mejorar su reutilización.
+> De nuevo damos paso a la comunidad para que pueda ayudar y aportar en el proyecto realizando peticiones de actualización (Pull Request)
+
+### Funcionalidad propia
+En primer lugar, utilizaremos un *hook* de estado para almacenar el estado de la búsqueda. Éste estado será la cadena buscada, inicializado como una cadena vacía.
+```jsx
+const [search, setSearch] =  useState("");
+```
+En segundo lugar, estructuramos el componente de la siguiente forma.
+```jsx
+return (
+  <View  style={styles.container}>
+	<TextInput
+	  style={styles.searchbar}
+	  placeholder="Search"
+	  onChangeText={handleSearchChange}
+	/>
+  </View>
+);
+```
+Se compone de un contenedor y dentro de éste, un *input* de texto con su estilo propio, su *placeholder* y un *prop* que contiene por defecto éste componente nativo de ReactNative el cual es **onChangeText**, el cual se ejecuta cada vez que el texto del input sufre un cambio.
+Éste prop llama a nuestro método **handleSearchChange**:
+```jsx
+const  handleSearchChange  = (s) => {
+  setSearch(s);
+};
+```
+Ésta función recibe por parámetro el texto contenido en el input y lo aplica en el estado de la búsqueda, quiere decir: *cada vez que la entrada del input cambia, el estado recoge el nuevo contenido de texto*.
+
+En tercer lugar, contamos con un *hook* **useEffect** que se encarga de realizar una función cada vez que el componente se renderiza.
+
+> El componente se renderizará mínimo una vez y además siempre que se actualicen las dependencias del useEffect.
+
+```jsx
+export  default  function  MySearchBar({ onSearchChange }) {
+...
+  useEffect(() => {
+	onSearchChange(search);
+  }, [search]);
+...
+}
+```
+Lo que sucede es que al componente MySearchBar se le pasa una función *callback* como *prop* desde componente **padre**. Ésta función es **onSearchChange**.
+
+La función onSearchChange **devolverá información** al componente padre de lo que se está tratando de buscar mediante un **parámetro**, al cual se le adjudica **el valor del estado** de la búsqueda.
+
+Hemos utilizado el hook useEffect para que éste comportamiento se ejecute cada vez que el valor del estado de la búsqueda se actualice, ya que como **dependencias**, lo incluye.
+
+> Ésta metodología se aplica para que la información de la búsqueda se le transmita al componente padre a tiempo real
+
+### Funcionalidad de otros componentes
+En otros componentes encontramos el resto de la funcionalidad, la cual se basa en filtrar los datos que se le otorgan a la *FlatList* en función de la búsqueda de nuestro componente MySearchBar.
+
+Utilizaremos a modo de explicación el componente **PersonajesScreen**, el cual será desarrollado completamente en el próximo apartado.
+```jsx
+const [personajes, setPersonajes] =  useState([]);
+const [search, setSearch] =  useState("");
+const [searchedPersonajes, setSearchedPersonajes] =  useState([]);
+```
+Éstos son los hooks de estado relevantes para la explicación de la funcionalidad de búsqueda de este componente.
+
+ - Los **personajes**: Todos los personajes.
+ - La **búsqueda**: La cadena buscada (el nombre del personaje)
+ - Los personajes **filtrados** por la búsqueda.
+
+Además también tenemos un hook **useEffect** relevante:
+```jsx
+useEffect(() => {
+  managePersonajesBySearch();
+}, [search, personajes]);
+```
+Se encarga de llamar al método **managePersonajesBySearch** el cual explicaremos a continuación.
+
+Pero primero cabe mostrar la estructura relevante del componente:
+```jsx
+<MySearchBar  onSearchChange={handleSearch}  />
+
+<FlatList
+  ...
+  data={searchedPersonajes}
+  ...
+/>
+```
+Entre otros componentes contamos con **MySearchBar** y con la **FlatList**.
+
+ - *MySearchBar*: en su prop **OnSearchChange**, adjudica una función callback llamada **handleSearch** encargada de fijar como valor al estado de búsqueda el valor recibido.
+```jsx
+const  handleSearch  = (searchValue) => {
+  setSearch(searchValue);
+};
+```
+ - *FlatList*: a su prop **data** se le establecerá como valor el del estado de los personajes ya filtrados según la búsqueda. Ésto significa que en la lista siempre se mostrarán los personajes filtrados y no el resto, a no ser que **no** se esté buscando ninguno.
+
+Éste último comportamiento se debe al método mencionado anteriormente: **managePersonajesBySearch**.
+```jsx
+const  managePersonajesBySearch  = () => {
+  if (search  !==  "") {
+  
+	let  buscados  =  personajes.filter((p) =>
+	p.name.toLowerCase().includes(search.toLowerCase())
+	);
+	
+    setSearchedPersonajes(buscados);
+    
+  } else {
+    setSearchedPersonajes(personajes);
+  }
+};
+```
+Brevemente;
+
+Si el valor del estado de búsqueda es igual a una **cadena vacía** (no se está buscando nada), los "personajes buscados" serán **todos** los personajes almacenados en el *hook* de personajes.
+
+En caso contrario, se **filtrará** dependiendo de si el nombre del personaje **incluye** el valor de la búsqueda.
+
+> Recordamos que la función **managePersonajesBySearch** es ejecutada cada vez que se **actualizan** los estados de la **búsqueda** o los **personajes** ya que es llamada en *useEffect* con **dependencias** a estos valores.
+
+![Character Card imagen](assets/docImg/SearchBar.PNG?row=true)
+
+# Navigation
