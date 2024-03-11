@@ -206,7 +206,7 @@ En cuanto a la funcionalidad, es ínfima. Lo único que realiza éste componente
 export  default  function  CharacterCard({ item }) {}
 ```
 En concreto, únicamente utiliza el *nombre* y la *imagen*.
-### Character Card
+### Mundo Card
 Éste componente es casi exactamente igual al anterior. De hecho pensamos en unificar ambos en un único componente **Card** pero debido a la falta de tiempo lo posponemos para implementarlo en un futuro.
 
 > Quisiéramos añadir que ustedes como comunidad también podéis aportar en el proyecto realizando una Pull Request.
