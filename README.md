@@ -344,3 +344,170 @@ En caso contrario, se **filtrará** dependiendo de si el nombre del personaje **
 ![Character Card imagen](assets/docImg/SearchBar.PNG?row=true)
 
 # Navigation
+Para la navegación de nuestra App hemos seguido la [documentación](https://reactnavigation.org/docs/getting-started/) de ReactNative y Expo.
+Se trata de una **arquitectura** de desarrollo que nos permite navegar entre *Stacks*, y éstos *Stacks* entre pantallas.
+Los componentes utilizados son los siguientes
+```bash
+|-- navigation
+|   |-- MyMenu.jsx
+|   |-- StackCharacter.jsx
+|   |-- StackMundo.jsx
+|-- screens
+|   |-- CharacterDetails.jsx
+|   |-- FavoritosScreen.jsx
+|   |-- MundoDetails.jsx
+|   |-- MundosScreen.jsx
+|   |-- PersonajesScreen.jsx
+```
+## MyMenu
+El componente MyMenu es el **contenedor principal** de la navegación entre stacks. 
+
+> En nuestro caso, es un *TabNavigator*, un navegador entre *Botom Tabs*: tabuladores situados en la parte inferior.
+
+Lo incorporamos en un *NavigationContainer* en *App.js*, el archivo /componente más prescincible de la App.
+```js
+export default function App() {
+  return (
+    <NavigationContainer>
+      ...
+      <MyMenu />
+    </NavigationContainer>
+  );
+}
+```
+La estructura de nuestro componente MyMenu es la siguiente:
+```jsx
+<Tab.Navigator screenOptions={{...}}>
+  <Tab.Screen
+    name="Personajes"
+    component={StackCharacter}
+    options={{
+      tabBarIcon: ({ size, color }) => {
+        return (
+          <MaterialCommunityIcons
+            name="account"
+            size={size}
+            color={color}
+          />
+        );
+      },
+    }}
+  />
+  <Tab.Screen
+    name="Mundos"
+    component={StackMundo}
+    options={{
+      tabBarIcon: ({ size, color }) => {
+        return (
+          <MaterialCommunityIcons
+            name="earth"
+            size={size}
+            color={color}
+          />
+        );
+      },
+    }}
+  />
+  <Tab.Screen
+    name="Favoritos"
+    initialParams={{ reRender: true }}
+    component={FavoritosScreen}
+    options={{
+      tabBarIcon: ({ size, color }) => {
+        return (
+          <MaterialCommunityIcons
+            name="progress-sta"
+            size={size}
+            color={color}
+          />
+        );
+      },
+    }}
+  />
+</Tab.Navigator>
+```
+
+ - TabNavigator: aloja los Tab.Screen
+ - TabScreen: utiliza como componente los Stacks
+
+Para los iconos usamos los [expo vector icons](https://icons.expo.fyi/Index) de la familia *MaterialCommunityIcons*.
+## Stacks
+Los Stacks nos permiten navegar entre pantallas. Establecen un enlace entre pantallas para que luego, desde éstas se pueda navegar hacia la otra contenida en el Stack.
+Esta es su estructura, ejemplificando con el componente *StackMundo*:
+```jsx
+<MundoStack.Navigator>
+  <MundoStack.Screen
+    name="MundosScreen"
+    component={MundosScreen}
+    ... 
+    options={{...}} 
+  />
+  <MundoStack.Screen
+    name="Detalle"
+    component={MundoDetails}
+    ...
+    options={{...}}
+  />
+</MundoStack.Navigator>
+```
+Se compone de un **Stack navegador** (*MundoStack.Navigator*) que engloba los dos **Stack de pantallas** (*MundoStack.Screen*).
+Cada stack de pantalla hace referencia a una pantalla y entre todas las pantallas del stack se podra establecer navegación.
+
+En nuestro caso son la **pantalla principal** y la del **detalle**.
+## Screens
+Como apuntamos anteriormente, para éste proyecto hemos dividido las pantallas en dos tipos.
+
+ - Principales: implementarán la funcionalidad de nuestra app.
+ - De detalle: únicamente tendrán la función de mostrar más detalles y alguna simple funcionalidad más.
+ 
+ ### Principales
+ 
+ - Mostrarán información recogida de la API de forma minimalista en nuestras **FlatList**
+ - Se encargarán de dar la **orden** de navegar hacia las pantallas de detalle
+
+Para ejemplificar usaremos el componente **MundosScreen**, el cual está estructurado de la siguiente forma:
+```jsx
+<ImageBackground source={...} style={styles.list}>
+  ...
+  <FlatList
+    ...
+    renderItem={({ item }) => (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Detalle", { item: item })}>
+        <MundoCard key={item.id} item={item} />
+      </TouchableOpacity>
+    )}
+    ...
+  />
+</ImageBackground>
+```
+Como se puede observar, cada componente que muestra la lista es un **TouchableOpacity**, un componente nativo de ReactNative que permite actuar como un **botón** pero con el **aspecto** de otro componente.
+En nuestro caso, su aspecto sería el de nuestras **card**.
+
+Lo interesante de éste componente es que al pulsarlo, nos permite realizar la **navegación** desde ésta pantalla hacia la pantalla de detalle añadiendo en su prop *onPress*la siguiente función: `()=>navigation.navigate("nombreStackScreen", {objeto de recursos que necesitemos})`
+
+ - Navega hacia la pantalla de detalles
+ - Proporciona el item pulsado de la lista
+
+### Detalles
+
+ - Recogen el elemento específico a detallar
+ - Muestran los datos
+
+Recoger el item a través de los parámetros proporcionados:
+```jsx
+export default function MundoDetails({ route }) {
+  const { item } = route.params;
+```
+Mostrar datos:
+```jsx
+{/* Nombre del mundo */}
+<View style={styles.colCenter}>
+  <Text style={styles.name}>{item.name}</Text>
+</View>
+```
+Además de estas dos funciones también realizan la funcionalidad de **añadir a favoritos** y, en el caso de los detalles de los mundos, **mostrar los personajes de cada mundo**.
+Todo esto mediante llamadas a la **API**. El código está disponible en el repositorio.
+
+# Video demostración
+
