@@ -217,7 +217,7 @@ El único comportamiento distinto a destacar es la utilización de una única va
  ```
  debido a que decidimos que el aspecto de éste componente sería cuadrado y no rectangular.
  
-![Character Card imagen](assets/docImg/MundoCard.PNG?row=true)
+![Mundo Card imagen](assets/docImg/MundoCard.PNG?row=true)
 
 ## SearchBar
 El componente MySearchBar se pensó para implementar una funcionalidad de búsqueda de *items*  en nuestras listas.
@@ -341,7 +341,7 @@ En caso contrario, se **filtrará** dependiendo de si el nombre del personaje **
 
 > Recordamos que la función **managePersonajesBySearch** es ejecutada cada vez que se **actualizan** los estados de la **búsqueda** o los **personajes** ya que es llamada en *useEffect* con **dependencias** a estos valores.
 
-![Character Card imagen](assets/docImg/SearchBar.PNG?row=true)
+![SearchBar imagen](assets/docImg/SearchBar.PNG?row=true)
 
 # Navigation
 Para la navegación de nuestra App hemos seguido la [documentación](https://reactnavigation.org/docs/getting-started/) de ReactNative y Expo.
@@ -511,3 +511,4 @@ Todo esto mediante llamadas a la **API**. El código está disponible en el repo
 
 # Video demostración
 
+![Video Demostración](assets/docImg/demostración.mp4?row=true)
