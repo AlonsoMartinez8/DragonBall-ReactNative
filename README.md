@@ -511,4 +511,6 @@ Todo esto mediante llamadas a la **API**. El código está disponible en el repo
 
 # Video demostración
 
-![Video Demostración](assets/docImg/demostración.mp4?row=true)
+https://github.com/AlonsoMartinez8/DragonBall-ReactNative/assets/117280599/6d7c6564-2ef2-4cb3-a17e-9ea84464a80f
+
+
